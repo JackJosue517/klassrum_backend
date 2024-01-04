@@ -1,11 +1,189 @@
+<!--
+ API Documentation HTML Template  - 1.0.1
+ Copyright © 2016 Florian Nicolas
+ Licensed under the MIT license.
+ https://github.com/ticlekiwi/API-Documentation-HTML-Template
+ !-->
 <!DOCTYPE html>
-<html lang="fr">
+<html class="no-js" lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation officielle - API Klassrum</title>
+	<meta charset="utf-8">
+	<title>API Klassrum- Documentation</title>
+	<meta name="description" content="">
+	<meta name="author" content="ticlekiwi">
+
+	<meta http-equiv="cleartype" content="on">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="css/hightlightjs-dark.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="css/style.css" media="all">
+	<script>hljs.initHighlightingOnLoad();</script>
 </head>
+
 <body>
-    <h1>Vous êtes sur la documentation officielle de l'API Klassrum.</h1>
+<div class="left-menu">
+    <div class="content-logo">
+			<div class="logo">
+					<img alt="platform by Emily van den Heever from the Noun Project" title="platform by Emily van den Heever from the Noun Project" src="images/logo.png" height="32" />
+					<span>API Documentation</span>
+			</div>
+			<button class="burger-menu-icon" id="button-menu-mobile">
+					<svg width="34" height="34" viewBox="0 0 100 100"><path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"></path><path class="line line2" d="M 20,50 H 80"></path><path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"></path></svg>
+			</button>
+    </div>
+    <div class="mobile-menu-closer"></div>
+    <div class="content-menu">
+        <div class="content-infos">
+            <div class="info"><b>Version:</b> 1.0.0</div>
+            <div class="info"><b>Dernière Modification:</b> 04 janvier 2024</div>
+        </div>
+        <ul>
+            <li class="scroll-to-link active" data-target="content-get-started">
+                <a>COMMENCER</a>
+            </li>
+            <li class="scroll-to-link" data-target="content-get-teachers">
+                <a>Enseignants</a>
+            </li>
+            <li class="scroll-to-link" data-target="content-errors">
+                <a>Erreurs</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="content-page">
+    <div class="content-code"></div>
+    <div class="content">
+        <div class="overflow-hidden content-section" id="content-get-started">
+            <h1>COMMENCER</h1>
+            <pre>
+                API Endpoint
+
+                https://klassrum.vercel.app/api/
+            </pre>
+            <p>
+                l'API Klassrum fournit un accès dynamique et flexible aux données pour construire une plateforme éducationnelle robuste. Vous pourrez avoir la liste des enseignants, étudiants, sessions de cours programmées, etc.
+            </p>
+            <p>
+                Pour utiliser cet API, vous aurez besoin <strong> d'une clé API</strong>. Veuillez nous contacter à <a href="mailto:jackjosue517@gmail.com">jackjosue517@gmail.com</a> pour avoir votre clé API.
+            </p>
+        </div>
+        <div class="overflow-hidden content-section" id="content-get-teachers">
+            <h2>enseignants</h2>
+            <pre><code class="bash">
+# Voici un exemple avec curl
+curl \
+-X GET https://klassrum.vercel.app/api/teachers/
+                </code></pre>
+            <p>
+                Pour avoir la liste de tous les enseignants disponibles, lancer une requête GET :<br>
+                <code class="higlighted break-word">https://klassrum.vercel.app/api/teachers/</code>
+            </p>
+            <br>
+            <pre><code class="json">
+Exemple de résultat :
+
+{
+	[
+		{
+			_id: '1',
+			firstname: 'HOETOWOU',
+			lastname: 'Yaovi',
+			fullname: 'M. HOETOWOU Yaovi',
+			role: "Enseignant à l'Ecole Polytchnique de Lomé",
+			courses: ['Programmation Orienté Objet'],
+		},
+		{
+		_id: '2',
+			firstname: 'BARATE',
+			lastname: 'Mohamed',
+			fullname: 'M. BARATE Mohamed',
+			role: "Enseignant à l'Ecole Polytchnique de Lomé",
+			courses: ['Utilitaires de dépannage'],
+		},
+	]
+}
+                </code></pre>
+            <h4>PARAMETRES DE LA REQUÊTE</h4>
+            <table class="central-overflow-x">
+                <thead>
+                <tr>
+                    <th>Champ</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>secret_key</td>
+                    <td>String</td>
+                    <td>Votre clé d'API</td>
+                </tr>
+                <tr>
+                    <td>genre</td>
+                    <td>String</td>
+                    <td>
+                        (optionnel) Une chaîne de caractères pour filtrer les enseignants par genre:<br>
+                        m: masculin<br>
+                        f: féminin
+                    </td>
+                </tr>
+                <tr>
+                    <td>limit</td>
+                    <td>Entier</td>
+                    <td>(optionnel - par défaut: 10) La limite de nombres d'objets à retourner, compris entre 1 et 100.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="overflow-hidden content-section" id="content-errors">
+            <h2>Erreurs</h2>
+            <p>
+                l'API de Klassrum utilise les codes d'erreur suivants:
+            </p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Code d'erreur</th>
+                    <th>Signification</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>X000</td>
+                    <td>
+                        Quelques paramètres sont manquants. Cette erreur apparît quand vous oubliez de passer certains paramètres essentiels à la requête.
+                    </td>
+                </tr>
+                <tr>
+                    <td>X001</td>
+                    <td>
+                        <code class="higlighted">secret_key</code> inconnu ou invalide. Cette erreur apparaît si vous utilisez une clé d'API inconnu, invalide ou ayant expiré.
+                    </td>
+                </tr>
+                <tr>
+                    <td>X002</td>
+                    <td>
+                    		<code class="higlighted">secret_key</code> invalide pour ce domaine. Cette erreur apparaît si vous utilisez une clé d'API non-spécifié à votre domaine donné.
+                    </td>
+                </tr>
+                <tr>
+                    <td>X003</td>
+                    <td>
+                        <code class="higlighted">Token utilisateur</code> inconnu ou invalide. Cette erreur apparaît si vous utilisez <code class="higlighted">token utilisateur</code> inconnu ou si le <code class="higlighted">token utilisateur </code> a expiré.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="content-code"></div>
+</div>
+
+<script src="js/script.js"></script>
 </body>
 </html>
