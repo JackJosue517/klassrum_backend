@@ -1,6 +1,16 @@
 const express = require('express')
+const mongoose = require('mongoose')
+const Teacher = require('./models/Teacher')
+const Student = require('./models/Student')
 
 const app = express()
+
+mongoose
+  .connect(
+    'mongodb+srv://jackjosue517:Mx8zeZ2LoZaUn1iz@cluster0.1ogdqqp.mongodb.net/?retryWrites=true&w=majority'
+  )
+  .then(() => console.log('Success connection with MongoDB!'))
+  .catch(() => console.log('Error occured during connection!!!'))
 
 app.use(express.static(__dirname + '/public'))
 
@@ -20,33 +30,59 @@ app.use((req, res, next) => {
 })
 
 app.post('/api/teachers', (req, res) => {
-  console.log(req.body)
-  res.status(201).json({
-    status: 'OK',
-    msg: 'Nouveau enseignant enregistré avec succès!',
+  delete req.body._id
+  const teacher = Teacher({
+    ...req.body,
   })
+  teacher
+    .save()
+    .then(() =>
+      res.status(201).json({
+        status: 'OK',
+        msg: 'Nouveau enseignant enregistré avec succès!',
+      })
+    )
+    .catch((error) => res.status(400).json({ error }))
 })
 
 app.get('/api/teachers', (req, res) => {
-  const teachers = [
-    {
-      _id: '1',
-      firstname: 'HOETOWOU',
-      lastname: 'Yaovi',
-      fullname: 'M. HOETOWOU Yaovi',
-      role: "Enseignant à l'Ecole Polytchnique de Lomé",
-      courses: ['Programmation Orienté Objet'],
-    },
-    {
-      _id: '2',
-      firstname: 'BARATE',
-      lastname: 'Mohamed',
-      fullname: 'M. BARATE Mohamed',
-      role: "Enseignant à l'Ecole Polytchnique de Lomé",
-      courses: ['Utilitaires de dépannage'],
-    },
-  ]
-  res.status(200).json(teachers)
+  Teacher.find()
+    .then((teachers) => res.status(200).json(teachers))
+    .catch((error) => res.status(400).json({ error }))
+})
+
+app.get('/api/teachers/:id', (req, res) => {
+  Thing.findOne({
+    _id: req.params.id,
+  })
+    .then((thing) => res.status(200).json(thing))
+    .catch((error) => res.status(404).json({ error }))
+})
+
+app.put('/api/teachers/:id', (req, res) => {
+  Teacher.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    .then(() =>
+      res.status(200).json({
+        message: 'Mise à jour du profil effectuée avec succès!',
+      })
+    )
+    .catch((error) =>
+      res.status(400).json({
+        error,
+      })
+    )
+})
+
+app.delete('/api/teachers/:id', (req, res) => {
+  Teacher.deleteOne({
+    _id: req.params.id,
+  })
+    .then(() =>
+      res.status(200).json({
+        message: 'Suppression effectuée avec succès',
+      })
+    )
+    .catch((error) => res.status(400).json({ error }))
 })
 
 module.exports = app

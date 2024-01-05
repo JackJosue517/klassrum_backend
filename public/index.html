@@ -49,6 +49,9 @@
             <li class="scroll-to-link" data-target="content-get-teachers">
                 <a>Enseignants</a>
             </li>
+            <li class="scroll-to-link" data-target="content-get-students">
+                <a>Etudiants</a>
+            </li>
             <li class="scroll-to-link" data-target="content-errors">
                 <a>Erreurs</a>
             </li>
@@ -90,7 +93,7 @@ Exemple de résultat :
 {
 	[
 		{
-			_id: '1',
+			_id: '6597fcde7982bcd6fa45bad2',
 			firstname: 'HOETOWOU',
 			lastname: 'Yaovi',
 			fullname: 'M. HOETOWOU Yaovi',
@@ -98,12 +101,166 @@ Exemple de résultat :
 			courses: ['Programmation Orienté Objet'],
 		},
 		{
-		_id: '2',
+		    _id: '6597fd487982bcd6fa45bad8',
 			firstname: 'BARATE',
 			lastname: 'Mohamed',
 			fullname: 'M. BARATE Mohamed',
 			role: "Enseignant à l'Ecole Polytchnique de Lomé",
 			courses: ['Utilitaires de dépannage'],
+		},
+	]
+}
+                </code></pre>
+            <p>
+                Pour ajouter un nouveau enseignant, utiliser une requête POST :<br>
+                <code class="higlighted break-word">https://klassrum.vercel.app/api/teachers/</code>
+            </p>
+            <br>
+            <h4>PARAMETRES DE LA REQUÊTE</h4>
+            <table class="central-overflow-x">
+                <thead>
+                <tr>
+                    <th>Champ</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>firstname</td>
+                    <td>String</td>
+                    <td>Prénom(s) de l'enseignant</td>
+                </tr>
+                <tr>
+                    <td>lastname</td>
+                    <td>String</td>
+                    <td>
+                        Nom de famille de l'enseignant
+                    </td>
+                </tr>
+                <tr>
+                    <td>role</td>
+                    <td>String</td>
+                    <td>Statut de l'enseignant au sein de la structure</td>
+                </tr>
+                <tr>
+                    <td>courses</td>
+                    <td>Array</td>
+                    <td>Unité(s) d'enseignement(s) dispensé(s) par l'enseignant</td>
+                </tr>
+                <tr>
+                    <td>fullname</td>
+                    <td>String</td>
+                    <td>(optionnel) - Nom complet de l'enseignant précédé de la mention "M."</td>
+                </tr>
+                <tr>
+                    <td>_id</td>
+                    <td>String</td>
+                    <td>(Non requis) Auto-genéré</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+                Pour supprimer un enseignant, lancer une requête DELETE :<br>
+                <code class="higlighted break-word">https://klassrum.vercel.app/api/teachers/:id</code>
+            </p>
+            <br>
+            <h4>PARAMETRES DE LA REQUÊTE</h4>
+            <table class="central-overflow-x">
+                <thead>
+                <tr>
+                    <th>Champ</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>_id</td>
+                    <td>String</td>
+                    <td>Identifiant personnel de l'enseignant</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+                Pour mettre à jour le statut d'un enseignant, utiliser une requête PUT :<br>
+                <code class="higlighted break-word">https://klassrum.vercel.app/api/teachers/:id</code>
+            </p>
+            <br>
+            <h4>PARAMETRES DE LA REQUÊTE</h4>
+            <table class="central-overflow-x">
+                <thead>
+                <tr>
+                    <th>Champ</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>firstname</td>
+                    <td>String</td>
+                    <td>Prénom(s) de l'enseignant</td>
+                </tr>
+                <tr>
+                    <td>lastname</td>
+                    <td>String</td>
+                    <td>
+                        Nom de famille de l'enseignant
+                    </td>
+                </tr>
+                <tr>
+                    <td>role</td>
+                    <td>String</td>
+                    <td>Statut de l'enseignant au sein de la structure</td>
+                </tr>
+                <tr>
+                    <td>courses</td>
+                    <td>Array</td>
+                    <td>Unité(s) d'enseignement(s) dispensé(s) par l'enseignant</td>
+                </tr>
+                <tr>
+                    <td>fullname</td>
+                    <td>String</td>
+                    <td>(optionnel) - Nom complet de l'enseignant précédé de la mention "M."</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="overflow-hidden content-section" id="content-get-students">
+            <h2>Etudiants</h2>
+            <pre><code class="bash">
+# Voici un exemple avec curl
+curl \
+-X GET https://klassrum.vercel.app/api/students/
+                </code></pre>
+            <p>
+                Pour avoir la liste de tous les étudiants inscrits, lancer une requête GET :<br>
+                <code class="higlighted break-word">https://klassrum.vercel.app/api/students/</code>
+            </p>
+            <br>
+            <pre><code class="json">
+Exemple de résultat :
+
+{
+	[
+		{
+			_id: '1',
+			firstname: 'AYAH',
+			lastname: 'Etsiam',
+            major: "Génie Logiciel"
+		},
+		{
+		    _id: '2',
+			firstname: 'GAOU',
+			lastname: 'Ania Luc',
+			major: "Génie Logiciel"
+		},
+        {
+		    _id: '3',
+			firstname: 'AYITEY',
+			lastname: 'Kodjo Josué',
+			major: "Génie Logiciel"
 		},
 	]
 }
