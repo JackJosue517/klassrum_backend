@@ -6,13 +6,13 @@ const Student = require('./models/Student')
 const app = express()
 
 mongoose
-  .connect(
-    'mongodb+srv://jackjosue517:Mx8zeZ2LoZaUn1iz@cluster0.1ogdqqp.mongodb.net/?retryWrites=true&w=majority'
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('Success connection with MongoDB!'))
   .catch(() => console.log('Error occured during connection!!!'))
 
 app.use(express.static(__dirname + '/public'))
+
+console.log(process.env)
 
 app.use(express.json())
 
