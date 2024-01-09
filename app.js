@@ -6,7 +6,9 @@ const Student = require('./models/Student')
 const app = express()
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    'mongodb+srv://vercel-admin-user:9NBlw4pMTKNI7azg@cluster0.2xoon5s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+  )
   .then(() => console.log('Success connection with MongoDB!'))
   .catch(() => console.log('Error occured during connection!!!'))
 
