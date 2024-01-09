@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const Teacher = require('./models/Teacher')
-const Student = require('./models/Student')
+const Teacher = require('./models/teacher')
+const Student = require('./models/student')
 
 const app = express()
 
@@ -13,8 +13,6 @@ mongoose
   .catch(() => console.log('Error occured during connection!!!'))
 
 app.use(express.static(__dirname + '/public'))
-
-console.log(process.env)
 
 app.use(express.json())
 
