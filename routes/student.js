@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const studentCtrl = require('./../controllers/student')
+const multer = require('./../middlewares/multer-config')
 
 router.get('/', studentCtrl.getAllStudents)
 router.get('/:id', studentCtrl.getOneStudent)
