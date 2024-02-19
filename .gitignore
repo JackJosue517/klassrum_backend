@@ -3,3 +3,6 @@
 
 # Environment files
 keys.env
+
+# Configuration files
+/firebase/firebase.config.json

@@ -1,0 +1,11 @@
+# POST http://127.0.0.1:3000/api/auth/students/login HTTP/1.1
+# content-type: application/json
+
+# {
+#     "username": "JackJosue517",
+#     "password": "azertyuiop"
+# }
+
+GET http://127.0.0.1:3000/api/students/ HTTP/1.1
+
+# GET http://127.0.0.1:3000/api/teachers/ HTTP/1.1

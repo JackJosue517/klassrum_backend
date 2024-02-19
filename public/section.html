@@ -1,0 +1,60 @@
+<div class="overflow-hidden content-section" id="content-get-students">
+    <h2>Etudiants</h2>
+    <pre><code class="bash">
+    # Voici un exemple avec curl
+    curl \
+    -X GET https://klassrum.onrender.com/api/students/
+            </code></pre>
+    <p>
+        Pour avoir la liste de tous les étudiants inscrits, lancer une
+        requête GET :<br />
+        <code class="higlighted break-word"
+        >https://klassrum.onrender.com/api/students/</code
+        >
+    </p>
+    <br />
+    <pre><code class="json">
+    Exemple de résultat :
+
+    {
+    [
+    {
+        title: 'Nouvelle Notification',
+        content: 'M. HOETOWOU Yaovi a ajouté une nouvelle session de cours.',
+        type: 'NotificationType.NEW'
+    },
+    ]
+    }
+            </code></pre>
+    <h4>PARAMETRES DE LA REQUÊTE</h4>
+    <table class="central-overflow-x">
+        <thead>
+        <tr>
+            <th>Champ</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>title</td>
+            <td>String</td>
+            <td>Titre de la notification</td>
+        </tr>
+        <tr>
+            <td>date</td>
+            <td>Date</td>
+            <td>
+            (optionnel et auto-generée) La date a laquelle l'action a été effectuée
+            </td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>String</td>
+            <td>
+            (optionnel) Type de notification(NEW?, UPDATE?, DELETE?)
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

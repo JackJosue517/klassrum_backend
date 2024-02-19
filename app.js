@@ -2,6 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const Teacher = require('./models/teacher')
 const Student = require('./models/student')
+const studentRoutes = require('./routes/student')
+const teacherRoutes = require('./routes/teacher')
+const authRoutes = require('./routes/auth')
+const notificationRoutes = require('./routes/notification')
+const auth = require('./middlewares/auth')
+const path = require('path')
 
 const app = express()
 
@@ -12,7 +18,9 @@ mongoose
   .then(() => console.log('Success connection with MongoDB!'))
   .catch(() => console.log('Error occured during connection!!!'))
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 app.use(express.json())
 
@@ -29,60 +37,37 @@ app.use((req, res, next) => {
   next()
 })
 
-app.post('/api/teachers', (req, res) => {
-  delete req.body._id
-  const teacher = Teacher({
-    ...req.body,
+app.get('/api/', (req, res, next) => {
+  res.status(200).json({ description: 'Base API Endpoint for Klassrum' })
+})
+
+app.get('/api/auth/', (req, res, next) => {
+  res
+    .status(200)
+    .json({ description: 'Authentification API Endpoint for Klassrum' })
+})
+
+app.get('/api/auth/teachers', (req, res, next) => {
+  res.status(200).json({
+    description: 'Authentification API Endpoint for teachers - Klassrum',
   })
-  teacher
-    .save()
-    .then(() =>
-      res.status(201).json({
-        status: 'OK',
-        msg: 'Nouveau enseignant enregistré avec succès!',
-      })
-    )
-    .catch((error) => res.status(400).json({ error }))
 })
 
-app.get('/api/teachers', (req, res) => {
-  Teacher.find()
-    .then((teachers) => res.status(200).json(teachers))
-    .catch((error) => res.status(400).json({ error }))
-})
-
-app.get('/api/teachers/:id', (req, res) => {
-  Thing.findOne({
-    _id: req.params.id,
+app.get('/api/auth/students', (req, res, next) => {
+  res.status(200).json({
+    description: 'Authentification API Endpoint for students - Klassrum',
   })
-    .then((thing) => res.status(200).json(thing))
-    .catch((error) => res.status(404).json({ error }))
 })
 
-app.put('/api/teachers/:id', (req, res) => {
-  Teacher.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-    .then(() =>
-      res.status(200).json({
-        message: 'Mise à jour du profil effectuée avec succès!',
-      })
-    )
-    .catch((error) =>
-      res.status(400).json({
-        error,
-      })
-    )
+app.get('/api/auth/', (req, res, next) => {
+  res
+    .status(200)
+    .json({ description: 'Authentification API Endpoint for Klassrum' })
 })
 
-app.delete('/api/teachers/:id', (req, res) => {
-  Teacher.deleteOne({
-    _id: req.params.id,
-  })
-    .then(() =>
-      res.status(200).json({
-        message: 'Suppression effectuée avec succès',
-      })
-    )
-    .catch((error) => res.status(400).json({ error }))
-})
+app.use('/api/students', auth, studentRoutes)
+app.use('/api/teachers', auth, teacherRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/notifications', auth, notificationRoutes)
 
 module.exports = app
