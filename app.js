@@ -12,9 +12,11 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(cors({
-  origin: "https://klassrum3.web.app, http://localhost:"
-}))
+app.use(
+  cors({
+    origin: 'https://klassrum3.web.app',
+  })
+)
 
 mongoose
   .connect(
