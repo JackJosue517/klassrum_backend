@@ -14,7 +14,7 @@ const app = express()
 
 app.use(
   cors({
-    origin: 'https://klassrum3.web.app',
+    origin: '*',
   })
 )
 
