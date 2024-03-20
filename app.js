@@ -8,8 +8,13 @@ const authRoutes = require('./routes/auth')
 const notificationRoutes = require('./routes/notification')
 const auth = require('./middlewares/auth')
 const path = require('path')
+const cors = require('cors')
 
 const app = express()
+
+app.use(cors({
+  origin: "https://klassrum3.web.app, http://localhost:"
+}))
 
 mongoose
   .connect(
@@ -24,16 +29,16 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 
 app.use(express.json())
 
-app.use(function (req, res, next) {
-  //Enabling CORS
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,PATCH')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization'
-  )
-  next()
-})
+// app.use(function (req, res, next) {
+//   //Enabling CORS
+//   res.header('Access-Control-Allow-Origin', '*')
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,PATCH')
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization'
+//   )
+//   next()
+// })
 
 app.get('/api/', (req, res, next) => {
   res.status(200).json({ description: 'Base API Endpoint for Klassrum' })
